@@ -1,44 +1,45 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const blogPosts = [
   {
     id: 1,
-    title: "Learn Python Programming",
+    title: "Mastering React: A Comprehensive Course",
     author: "Alice Johnson",
-    image: "https://miro.medium.com/v2/resize:fit:840/1*RJMxLdTHqVBSijKmOO5MAg.jpeg",
-    content: "Master the basics of Python programming, a versatile and powerful language for various applications.",
+    image: "https://www.creativeitinstitute.com/images/course/course_1674371266.jpg",
+    content: "You will learn all the key fundamentals as well as advanced concepts and related topics to turn you into a React.js developer.",
     link: "/course1"
   },
   {
     id: 2,
-    title: "Complete Frontend Development",
+    title: "Java In-Depth: Become a Complete Java Engineer!",
     author: "Bob Smith",
-    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlcryHWUb8QxKH4ARcJxlL4NDLo0fbQD0zsQVDgxUtG__QKlImlAnrxRaOz2_TgoANFxdD3tW9_MHvFntlcnmFrEqHtr-PJfAGXG0ODZo1w0jag9xlcpe1T_BrTFz2ONZevWv-IrMYnD4/w1200-h630-p-k-no-nu/The+Complete+Front-End+Web+Development+Course+best+Udemy+course.jpg",
-    content: "Become proficient in frontend development with HTML, CSS, JavaScript, and modern frameworks.",
+    image: "https://www.aqskill.com/wp-content/uploads/2021/05/52c9a98cf9e0-5.jpg",
+    content: "Comprehensive Java programming course integrated with best practices, design rules, and instructor-led Java EE project",
     link: "/course2"
   },
   {
     id: 3,
-    title: "Mastering Django",
+    title: "Python & Django | The Complete Django Web Development Course",
     author: "Charlie Brown",
     image: "https://img-c.udemycdn.com/course/750x422/1562632_a245_2.jpg",
-    content: "Build robust web applications with Django, a high-level Python web framework.",
+    content: "Learn how to build web applications and websites",
     link: "/course3"
   },
   {
     id: 4,
-    title: "Java Programming Essentials",
+    title: "Machine Learning & Deep Learning in Python & R",
     author: "Diana Green",
-    image: "https://www.aqskill.com/wp-content/uploads/2021/05/52c9a98cf9e0-5.jpg",
-    content: "Understand the fundamentals of Java, a popular language for enterprise-level applications.",
-    link: "#"
+    image: "https://www.fsm.ac.in/blog/wp-content/uploads/2022/08/ml-e1610553826718.jpg",
+    content: "Covers Regression, Decision Trees, SVM,Time Series Forecasting and more using both Python & R",
+    link: "/course4"
   },
   {
     id: 5,
-    title: "Advanced React Development",
+    title: "Android Java Masterclass - Become an App Developer",
     author: "Eve White",
-    image: "https://fireship.io/courses/react/img/featured.png",
-    content: "Deep dive into React, a powerful library for building user interfaces.",
+    image: "https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/wgJRPFF5RMOqvoX3aXjq",
+    content: "Improve your career options by learning Android app Development. Master Android Studio and build your first app today",
     link: "#"
   },
   {
@@ -103,11 +104,7 @@ const Carousel = () => {
         </button>
         <div ref={carouselRef} className="relative flex space-x-6 overflow-x-auto pb-4 no-scrollbar">
           {blogPosts.map((post) => (
-            <div
-              key={post.id}
-              className="flex-none w-80 h-[27rem] bg-gray-200 shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform transform hover:-translate-y-2 mx-4 flex flex-col justify-between"
-              style={{ transition: 'transform 0.3s ease' }}
-            >
+            <Link to={post.link} key={post.id} className="flex-none w-80 h-[27rem] bg-gray-100 shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform transform hover:-translate-y-2 mx-4 flex flex-col justify-between" style={{ transition: 'transform 0.3s ease' }}>
               <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
               <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
@@ -115,9 +112,9 @@ const Carousel = () => {
                   <p className="text-sm text-gray-600 mt-2">{post.author}</p>
                   <p className="text-sm text-gray-500 mt-4">{post.content}</p>
                 </div>
-                <a href={post.link} className="text-blue-500 mt-4 block">Read more</a>
+                <span className="text-blue-500 mt-4 block">Read more</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <button onClick={scrollRight} className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full shadow-md z-10">

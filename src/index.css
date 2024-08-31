@@ -137,3 +137,41 @@
     animation: fadeInOut 5s ease-in infinite;
   }
   
+  /* Add this to your global CSS file or in a <style jsx> block in your component */
+
+.speech-bubble {
+  position: relative;
+  border-radius: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -20px; /* Adjust to position the tail */
+  left: 80%; /* Adjust to center the tail */
+  transform: translateX(-50%);
+  border-width: 20px 10px 0;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

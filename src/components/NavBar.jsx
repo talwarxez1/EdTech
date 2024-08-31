@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import CustomCursor from "./CustomCursor";
 import AnimatedText from "./AnimatedText"; 
 import logo from '../assets/logo.png';
@@ -9,9 +9,37 @@ const Navbar_One = () => {
   const [isFaqsDropdownOpen, setFaqsDropdownOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
+  const coursesRef = useRef(null);
+  const servicesRef = useRef(null);
+  const faqsRef = useRef(null);
+  const dropdowns = {
+    courses: coursesRef,
+    services: servicesRef,
+    faqs: faqsRef
+  };
+
   const toggleFaq = (faqIndex) => {
     setOpenFaq(openFaq === faqIndex ? null : faqIndex);
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      coursesRef.current && !coursesRef.current.contains(event.target) &&
+      servicesRef.current && !servicesRef.current.contains(event.target) &&
+      faqsRef.current && !faqsRef.current.contains(event.target)
+    ) {
+      setCoursesDropdownOpen(false);
+      setServicesDropdownOpen(false);
+      setFaqsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -23,9 +51,14 @@ const Navbar_One = () => {
           </div>
           <div className="hidden md:flex md:text-[14px]">
             <ul className="flex gap-24 ml-8">
-              <li className="relative">
+              <li 
+                className="relative"
+                onMouseEnter={() => setCoursesDropdownOpen(true)}
+                onMouseLeave={() => !isCoursesDropdownOpen && setCoursesDropdownOpen(false)}
+                ref={coursesRef}
+              >
                 <button
-                  onClick={() => setCoursesDropdownOpen(!isCoursesDropdownOpen)}
+                  onClick={() => setCoursesDropdownOpen(prev => !prev)}
                   className="text-black font-bold hover:text-gray-300 flex items-center"
                 >
                   <AnimatedText text1="COURSES" />
@@ -48,31 +81,36 @@ const Navbar_One = () => {
                 {isCoursesDropdownOpen && (
                   <ul className=" font-poppins absolute top-full mt-2 w-48 bg-white shadow-lg rounded-lg">
                     <li>
-                      <a href="#course1" className="block px-4 py-2 text-black hover:bg-gray-100">
-                      Data Analytics
+                      <a href="/course1" className="block px-4 py-2 text-black hover:bg-gray-100">
+                        Mastering React
                       </a>
                     </li>
                     <li>
-                      <a href="#course2" className="block px-4 py-2 text-black hover:bg-gray-100">
-                      Machine Learning
+                      <a href="/course2" className="block px-4 py-2 text-black hover:bg-gray-100">
+                        Java in Depth
                       </a>
                     </li>
                     <li>
-                      <a href="#course3" className="block px-4 py-2 text-black hover:bg-gray-100">
-                      Artificial Intelligence
+                      <a href="/course3" className="block px-4 py-2 text-black hover:bg-gray-100">
+                        Python & Django
                       </a>
                     </li>
                     <li>
-                      <a href="#course3" className="block px-4 py-2 text-black hover:bg-gray-100">
-                      Web Development
+                      <a href="/course4" className="block px-4 py-2 text-black hover:bg-gray-100">
+                        Machine Learning
                       </a>
                     </li>
                   </ul>
                 )}
               </li>
-              <li className="relative">
+              <li 
+                className="relative"
+                onMouseEnter={() => setServicesDropdownOpen(true)}
+                onMouseLeave={() => !isServicesDropdownOpen && setServicesDropdownOpen(false)}
+                ref={servicesRef}
+              >
                 <button
-                  onClick={() => setServicesDropdownOpen(!isServicesDropdownOpen)}
+                  onClick={() => setServicesDropdownOpen(prev => !prev)}
                   className="text-black hover:text-gray-300 font-bold flex items-center"
                 >
                   <AnimatedText text1="SERVICES" />
@@ -127,9 +165,14 @@ const Navbar_One = () => {
                   <AnimatedText text1="ABOUT" />
                 </a>
               </li>
-              <li className="relative">
+              <li 
+                className="relative"
+                onMouseEnter={() => setFaqsDropdownOpen(true)}
+                onMouseLeave={() => !isFaqsDropdownOpen && setFaqsDropdownOpen(false)}
+                ref={faqsRef}
+              >
                 <button
-                  onClick={() => setFaqsDropdownOpen(!isFaqsDropdownOpen)}
+                  onClick={() => setFaqsDropdownOpen(prev => !prev)}
                   className="text-black hover:text-gray-300 font-bold flex items-center"
                 >
                   <AnimatedText text1="FAQs" />
@@ -247,10 +290,10 @@ const Navbar_One = () => {
             </ul>
           </div>
           <section className="flex">
-            <button className="bg-gradient-to-r from-[#e97c10] to-[#f5b15e] text-white hover:text-black rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 flex items-center justify-center px-4 h-12 text-[13px]">
+            <button className="w-20 bg-orange-500 text-white hover:text-black rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 flex items-center justify-center px-4 h-12 text-[13px]">
               LOGIN
             </button>
-            <button className="bg-gradient-to-r from-[#e97c10] to-[#f5b15e] text-white  hover:text-black rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 flex items-center justify-center px-4 h-12 text-[13px] mx-5">
+            <button className="bg-orange-500 text-white hover:text-black rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 flex items-center justify-center px-4 h-12 text-[13px] mx-5">
               SIGN UP
             </button>
           </section>

@@ -4,7 +4,7 @@ import Carousel from '../components/Carousel'
 import MarqueeLogos from '../components/MarqueeLogos'
 import VideoComp from '../components/VideoComp'
 import Reports from '../components/Reports'
-
+import AboutCompany from '../components/AboutCompany'
 
 
 const Home = () => {
@@ -20,8 +20,11 @@ const Home = () => {
     <section>
       <MarqueeLogos/>
     </section>
-    <section className="">
+    <section className="bg-gray-100">
       <VideoComp/>
+    </section>
+    <section>
+      <AboutCompany/>
     </section>
     </div>
   )
